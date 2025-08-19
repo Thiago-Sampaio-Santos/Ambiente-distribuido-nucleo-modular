@@ -1,0 +1,33 @@
+syntax = "proto3";
+package groupa;
+option java_multiple_files = true;
+option java_package = "br.ifba.saj.ads10.grpc";
+option java_outer_classname = "GroupAProto";
+
+service GroupAService {
+  rpc Ping (PingRequest) returns (PingReply);
+  rpc Event (EventRequest) returns (EventReply);
+}
+
+message PingRequest {
+  string from = 1;
+  int64 lamport = 2;
+  string token = 3;
+}
+
+message PingReply {
+  string ok = 1;
+  int64 lamport = 2;
+}
+
+message EventRequest {
+  string from = 1;
+  string payload = 2;
+  int64 lamport = 3;
+  string token = 4;
+}
+
+message EventReply {
+  string ack = 1;
+  int64 lamport = 2;
+}

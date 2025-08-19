@@ -1,0 +1,88 @@
+services:
+  a1:
+    image: saj-distrib-java21:latest
+    container_name: saj-a1
+    environment:
+      - GROUP=A
+      - NODE_ID=1
+      - TCP_PORT=7001
+      - GRPC_PORT=50051
+      - RMI_PORT=1101
+    ports:
+      - "7001:7001"
+      - "50051:50051"
+      - "1101:1101"
+
+  a2:
+    image: saj-distrib-java21:latest
+    container_name: saj-a2
+    environment:
+      - GROUP=A
+      - NODE_ID=2
+      - TCP_PORT=7002
+      - GRPC_PORT=50052
+      - RMI_PORT=1102
+    ports:
+      - "7002:7002"
+      - "50052:50052"
+      - "1102:1102"
+
+  a3:
+    image: saj-distrib-java21:latest
+    container_name: saj-a3
+    environment:
+      - GROUP=A
+      - NODE_ID=3
+      - TCP_PORT=7003
+      - GRPC_PORT=50053
+      - RMI_PORT=1103
+    ports:
+      - "7003:7003"
+      - "50053:50053"
+      - "1103:1103"
+
+  b1:
+    image: saj-distrib-java21:latest
+    container_name: saj-b1
+    environment:
+      - GROUP=B
+      - NODE_ID=1
+      - TCP_PORT=7011
+      - GRPC_PORT=50151
+      - RMI_PORT=1111
+    ports:
+      - "7011:7011"
+      - "50151:50151"
+      - "1111:1111"
+
+  b2:
+    image: saj-distrib-java21:latest
+    container_name: saj-b2
+    environment:
+      - GROUP=B
+      - NODE_ID=2
+      - TCP_PORT=7012
+      - GRPC_PORT=50152
+      - RMI_PORT=1112
+    ports:
+      - "7012:7012"
+      - "50152:50152"
+      - "1112:1112"
+
+  b3:
+    image: saj-distrib-java21:latest
+    container_name: saj-b3
+    environment:
+      - GROUP=B
+      - NODE_ID=3
+      - TCP_PORT=7013
+      - GRPC_PORT=50153
+      - RMI_PORT=1113
+    ports:
+      - "7013:7013"
+      - "50153:50153"
+      - "1113:1113"
+
+networks:
+  default:
+    driver: bridge
