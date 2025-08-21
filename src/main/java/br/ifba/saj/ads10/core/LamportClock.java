@@ -3,9 +3,9 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class LamportClock {
     private final AtomicLong time = new AtomicLong(0);
-    public long tick() { return time.incrementAndGet(); }           // local event
-    public long send() { return tick(); }                            // before send
-    public long recv(long other) {                                   // on receive
+    public long tick() { return time.incrementAndGet(); }           // evento local
+    public long send() { return tick(); }                            // envio
+    public long recv(long other) {                                   // receber
         while (true) {
             long current = time.get();
             long next = Math.max(current, other) + 1;

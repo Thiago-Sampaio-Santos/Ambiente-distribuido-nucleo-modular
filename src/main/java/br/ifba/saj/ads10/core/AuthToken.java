@@ -19,7 +19,7 @@ public class AuthToken {
                 .withExpiresAt(Date.from(Instant.now().plusSeconds(ttlSeconds)))
                 .sign(alg);
     }
-    public boolean validate(String token) {
+    public boolean valide(String token) {
         try {
             DecodedJWT jwt = JWT.require(alg).build().verify(token);
             return jwt.getExpiresAt().after(new Date());

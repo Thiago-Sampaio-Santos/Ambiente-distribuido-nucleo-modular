@@ -12,14 +12,14 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         Config cfg = Config.fromEnv();
-        log.info("Starting node: {}", cfg);
+        log.info("Iniciando node: {}", cfg);
         LamportClock clock = new LamportClock();
         HeartbeatManager hb = new HeartbeatManager(cfg, clock);
         MulticastService multicast = new MulticastService(cfg, clock);
         TcpServer tcpServer = new TcpServer(cfg, clock);
         tcpServer.start();
 
-        // Start role-specific middleware
+        // Iniciar middleware específico para a role
         if (cfg.group().equalsIgnoreCase("A")) {
             GrpcNode node = new GrpcNode(cfg, clock);
             node.start();
@@ -28,7 +28,7 @@ public class Main {
             node.start();
         }
 
-        // Kickoff election per group
+        // Iniciar a eleição por grupo
         if (cfg.group().equalsIgnoreCase("A")) {
             new Thread(() -> {
                 try { new BullyElection(cfg, clock).startElection(); } catch (Exception e) { log.error("Election error", e); }
@@ -39,11 +39,10 @@ public class Main {
             }).start();
         }
 
-        // Heartbeats + multicast listener
+        // Heartbeats + multicast
         hb.start();
         multicast.start();
 
-        // Keep running
         Thread.currentThread().join();
     }
 }

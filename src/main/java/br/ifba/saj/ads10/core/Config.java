@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public record Config(
-        String group, // "A" or "B"
-        int nodeId,   // unique within group
-        List<String> peers, // host:tcpPort:rmiOrGrpcPort per group
+        String group, // "A" ou "B"
+        int nodeId,   // unico dentro do grupo
+        List<String> peers, // host:tcpPort:rmiOrGrpcPort por grupo
         String tokenSecret,
         int tcpPort,
         int grpcPort,

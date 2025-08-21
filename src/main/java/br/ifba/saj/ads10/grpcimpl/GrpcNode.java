@@ -15,7 +15,7 @@ public class GrpcNode {
 
     public void start() throws Exception {
         server = ServerBuilder.forPort(cfg.grpcPort()).addService(new GroupAServiceImpl()).build().start();
-        log.info("gRPC server started at {}", cfg.grpcPort());
+        log.info("servidor gRPC iniciado em  {}", cfg.grpcPort());
         new Thread(()->{
             try { server.awaitTermination(); } catch (InterruptedException ignored) {}
         }).start();
@@ -25,8 +25,8 @@ public class GrpcNode {
         private final AuthToken auth = new AuthToken(cfg.tokenSecret());
         @Override
         public void ping(PingRequest request, StreamObserver<PingReply> responseObserver) {
-            if (!auth.validate(request.getToken())) {
-                responseObserver.onError(new RuntimeException("unauthorized"));
+            if (!auth.valide(request.getToken())) {
+                responseObserver.onError(new RuntimeException("não autorizado"));
                 return;
             }
             long l = clock.recv(request.getLamport());
@@ -36,8 +36,8 @@ public class GrpcNode {
 
         @Override
         public void event(EventRequest request, StreamObserver<EventReply> responseObserver) {
-            if (!auth.validate(request.getToken())) {
-                responseObserver.onError(new RuntimeException("unauthorized"));
+            if (!auth.valide(request.getToken())) {
+                responseObserver.onError(new RuntimeException("não autorizado"));
                 return;
             }
             long l = clock.recv(request.getLamport());

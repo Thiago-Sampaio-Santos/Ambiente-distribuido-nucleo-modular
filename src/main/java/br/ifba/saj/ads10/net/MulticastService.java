@@ -38,6 +38,6 @@ public class MulticastService {
             InetAddress group = InetAddress.getByName(cfg.mcastAddr());
             DatagramPacket packet = new DatagramPacket(buf, buf.length, group, cfg.mcastPort());
             socket.send(packet);
-        } catch (Exception e){ log.error("MCAST send error", e); }
+        } catch (Exception e){ log.error("MCAST, erro de envio", e); }
     }
 }

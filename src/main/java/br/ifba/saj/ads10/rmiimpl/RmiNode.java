@@ -14,6 +14,6 @@ public class RmiNode {
         try { LocateRegistry.createRegistry(cfg.rmiPort()); } catch (Exception ignored) {}
         var impl = new RmiServiceImpl(clock, cfg.tokenSecret());
         Naming.rebind("//0.0.0.0:"+cfg.rmiPort()+"/service", impl);
-        log.info("RMI service bound on {}", cfg.rmiPort());
+        log.info("RMI vinculado em  {}", cfg.rmiPort());
     }
 }

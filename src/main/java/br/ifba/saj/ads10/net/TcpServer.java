@@ -18,10 +18,10 @@ public class TcpServer {
                 try {
                     Socket s = server.accept();
                     pool.submit(()->handle(s));
-                } catch (IOException e) { log.error("Accept error", e); }
+                } catch (IOException e) { log.error("Aceitar erro", e); }
             }
         });
-        log.info("TCP server listening on {}", cfg.tcpPort());
+        log.info("TCP server ouvindo em {}", cfg.tcpPort());
     }
     private void handle(Socket s){
         try(s; var in = new BufferedReader(new InputStreamReader(s.getInputStream()));
@@ -31,10 +31,10 @@ public class TcpServer {
             String[] parts = line.split(" ");
             switch (parts[0]){
                 case "HB" -> { clock.recv(Long.parseLong(parts[2])); out.println("OK "+clock.now()); }
-                case "ELECT?" -> { clock.recv(Long.parseLong(parts[2])); out.println("ALIVE "+clock.now()); }
-                case "LEADER" -> { log.info("New leader announced: {}", parts[1]); out.println("ACK"); }
-                case "RING" -> { log.info("Received ring token from {}", parts[1]); out.println("ACK"); }
-                default -> { out.println("ERR"); }
+                case "ELECT?" -> { clock.recv(Long.parseLong(parts[2])); out.println("VIVO "+clock.now()); }
+                case "LEADER" -> { log.info("Novo líder anunciado: {}", parts[1]); out.println("ACK"); }
+                case "RING" -> { log.info("Recebeu o token do anel de {}", parts[1]); out.println("ACK"); }
+                default -> { out.println("Error"); }
             }
         } catch (Exception e){ log.error("TCP handle error", e); }
     }

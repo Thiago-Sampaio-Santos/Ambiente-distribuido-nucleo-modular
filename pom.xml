@@ -6,7 +6,7 @@
     <groupId>br.ifba.saj.ads10</groupId>
     <artifactId>saj-distrib-java21</artifactId>
     <version>1.0.0</version>
-    <name>SAJ-ADS10 Distributed Simulation</name>
+    <name>Simulação Distribuída</name>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

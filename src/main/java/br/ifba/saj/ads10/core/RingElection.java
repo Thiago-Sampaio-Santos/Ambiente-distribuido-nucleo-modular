@@ -11,12 +11,12 @@ public class RingElection {
     private final Config cfg; private final LamportClock clock;
     public RingElection(Config cfg, LamportClock clock) { this.cfg = cfg; this.clock = clock; }
     public void startElection() {
-        log.info("Ring election starting for Group B, node {}", cfg.nodeId());
+        log.info("Eleição de anel iniciando para o Grupo B, node {}", cfg.nodeId());
         List<String> ordered = cfg.peers().stream().sorted(Comparator.comparingInt(p->Integer.parseInt(p.split(":")[2]))).collect(Collectors.toList());
         int myIdx = Math.max(0, ordered.indexOf(selfPeer()));
         String next = ordered.get((myIdx+1)%ordered.size());
         TcpClient.send(next.split(":")[0], Integer.parseInt(next.split(":")[1]), "RING " + cfg.nodeId());
-        log.info("Sent ring token to {}", next);
+        log.info("Token enviado para {}", next);
     }
     private String selfPeer() {
         for (String p: cfg.peers()) if (Integer.parseInt(p.split(":")[2])==cfg.nodeId()) return p;

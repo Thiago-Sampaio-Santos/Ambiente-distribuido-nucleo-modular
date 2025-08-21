@@ -12,11 +12,11 @@ public class RmiServiceImpl extends UnicastRemoteObject implements RmiService {
         super(); this.clock=clock; this.auth = new AuthToken(secret);
     }
     @Override public String ping(String token, long lamport) throws RemoteException {
-        if (!auth.validate(token)) throw new RemoteException("unauthorized");
+        if (!auth.valide(token)) throw new RemoteException("não autorizado");
         clock.recv(lamport); return "pong:" + clock.now();
     }
     @Override public String event(String token, long lamport, String payload) throws RemoteException {
-        if (!auth.validate(token)) throw new RemoteException("unauthorized");
+        if (!auth.valide(token)) throw new RemoteException("não autorizado");
         clock.recv(lamport); return "ack:" + clock.now();
     }
 }
