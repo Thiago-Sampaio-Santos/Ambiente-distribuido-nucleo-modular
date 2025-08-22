@@ -1,0 +1,6 @@
+# Ignorar arquivos de compilação do Maven
+target/
+
+# Ignorar metadados do IntelliJ/IDEA
+.idea/
+*.iml
